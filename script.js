@@ -27,7 +27,7 @@ const processCSV = (filePath) => {
     rl.on("error", (err) => {
       if (err.code === "ENOENT") {
         console.error(`File not found: ${filePath}`);
-        resolve(debts); // Resolving with an empty object, adjust as needed
+        resolve(debts); // Resolving with an empty object
       } else {
         reject(err);
       }
