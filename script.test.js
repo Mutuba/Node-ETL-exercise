@@ -82,7 +82,7 @@ describe("CSV Processing", () => {
     // Run the CSV processing function
     await processAndWriteCSV(nonExistentFilePath, "output.csv");
 
-    // Check that the function doesn't throw an error (handles non-existent file gracefully)
+    // handles non-existent file gracefully
     expect(true).to.equal(true);
   });
 
@@ -93,7 +93,7 @@ describe("CSV Processing", () => {
     // Run the CSV processing function
     const debts = await processCSV(emptyFilePath);
 
-    // Check that the result is an empty object (handles empty file gracefully)
+    //  (handles empty file gracefully
     expect(debts).to.deep.equal({});
 
     // Clean up test file
@@ -106,7 +106,7 @@ describe("CSV Processing", () => {
     // Run the CSV processing and writing function without specifying the output file
     await processAndWriteCSV(inputFilePath);
 
-    // Check that the function doesn't throw an error (handles missing output file gracefully)
+    // handles missing output file gracefully
     expect(true).to.equal(true);
   });
 });
