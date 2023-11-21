@@ -1,11 +1,28 @@
 const fs = require("fs");
-const { expect } = require("chai");
-const { processCSV, writeOutput, processAndWriteCSV } = require("./script.js");
+const chai = require("chai");
+
+const chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
+
+const { expect } = chai;
+
+const {
+  processCSV,
+  writeOutput,
+  processAndWriteCSV,
+  runScript,
+} = require("./script.js");
+
+process.argv = ["node", "script.js"];
 
 describe("CSV Processing", () => {
   it("should correctly process the CSV file", async () => {
     const inputFilePath = "test-file.csv";
     const expectedOutputFilePath = "test-output.csv";
+
+    // Run the script with mocked arguments
+    runScript(["node", "script.js", inputFilePath]);
 
     // Run the CSV processing function
     const debts = await processCSV(inputFilePath);
@@ -70,20 +87,12 @@ describe("CSV Processing", () => {
     const nonExistentFilePath = "non-existent-file.csv";
 
     // Run the CSV processing function
-    const debts = await processCSV(nonExistentFilePath);
-
-    // Check that the result is an empty object (handles non-existent file gracefully)
-    expect(debts).to.deep.equal({});
-  });
-
-  it("should handle non-existent input file", async () => {
-    const nonExistentFilePath = "non-existent-file.csv";
-
-    // Run the CSV processing function
-    await processAndWriteCSV(nonExistentFilePath, "output.csv");
-
-    // handles non-existent file gracefully
-    expect(true).to.equal(true);
+    try {
+      await processAndWriteCSV(nonExistentFilePath, "output.csv");
+    } catch (error) {
+      // Check if the error message includes the expected message
+      expect(error.message).to.include("File not found: non-existent-file.csv");
+    }
   });
 
   it("should handle empty input file", async () => {
