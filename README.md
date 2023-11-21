@@ -1,6 +1,6 @@
 ## A Min Node js app to analyse a CSV file and prepare a report from it
 
-The app applies ETL principles to achive the task.
+The app applies ETL principles to achieve the task.
 
 ## The Scenario
 
@@ -41,7 +41,7 @@ If you have cloned the repository, you will have input file ready.
 To execute the script:
 `node script.js test-file.csv`
 
-This will write output results to `output.csv` file which as part of the repository files.
+This will write output results to `output.csv` file which is part of the repository files.
 
 To run the tests:
 
