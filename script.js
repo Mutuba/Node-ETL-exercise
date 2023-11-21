@@ -148,7 +148,9 @@ const runScript = (args) => {
       console.log("");
       console.log("Examples:");
       console.log("  $ node index.js path/to/your/file.csv");
-      console.log("  $ node index.js path/to/your/file.csv customOutput.csv");
+      console.log(
+        "  $ node index.js path/to/your/file.csv -o customOutput.csv"
+      );
     });
 
   // Parse command-line arguments
