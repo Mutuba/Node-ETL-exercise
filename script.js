@@ -9,7 +9,7 @@ const { Command } = require("commander");
 const program = new Command();
 
 /**
- * Process a CSV file to calculate debts.
+ * Process a CSV file to calculate debts. Extract and Transform part of ETL pipeline
  *
  * @param {string} filePath - The path to the CSV file.
  * @returns {Promise<Object>} A promise that resolves to an object representing debts.
@@ -29,6 +29,7 @@ const processCSV = (filePath) => {
     const debts = {};
 
     // Create a Transform stream to process CSV lines
+    // Transform part of ETL pipeline
     const transformStream = new Transform({
       objectMode: true,
       transform(line, encoding, callback) {
@@ -46,6 +47,7 @@ const processCSV = (filePath) => {
     });
 
     // Create a Readline interface to read the CSV file line by line
+    // Extract part of ETL pipeline
     const rl = readline.createInterface({
       input: fs.createReadStream(filePath),
       // Configure the readline interface to interpret carriage return characters (\r)
@@ -54,6 +56,8 @@ const processCSV = (filePath) => {
     });
 
     // Connect the Readline and Transform streams using pipeline
+    // This is a min demonstration of ETL pipeline in Node.js
+    // Invoking Transform part of ETL pipeline
     pipeline(rl, transformStream, (error) => {
       if (error) {
         console.error(`Error processing file: ${error.message}`);
@@ -66,7 +70,7 @@ const processCSV = (filePath) => {
 };
 
 /**
- * Write debts to an output file.
+ * Write debts to an output file. Load part of ETL pipeline
  *
  * @param {string} outputFilePath - The path to the output file.
  * @param {Object} debts - Object representing debts.
